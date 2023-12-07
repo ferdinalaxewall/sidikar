@@ -52,7 +52,7 @@
                 <div class="col-sm-10">
                     <div class="row py-1" style="gap: 10px;">
                         <div class="col-12">
-                            <img src="<?= base_url("assets/img/profile/{$user['image']}") ?>" alt="" class="img-thumbnail">
+                            <img src="<?= base_url("assets/img/profile/") . $user['image'] ?? 'default.png' ?>" alt="" class="img-thumbnail">
                         </div>
                         <div class="col-12">
                             <div class="custom-file">

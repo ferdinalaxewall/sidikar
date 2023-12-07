@@ -10,7 +10,6 @@ class User extends CI_Controller
 
     public function index()
     {
-        var_dump($this->session->userdata('nip'));
         $data['judul'] = 'Profil Saya';
         $data['user'] = $this->ModelUser->cekData([
             'nip' => $this->session->userdata('nip')

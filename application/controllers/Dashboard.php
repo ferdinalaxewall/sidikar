@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller
     {
         $data['judul'] = 'Dashboard';
         $data['user'] = $this->ModelUser->cekData(['nip' => $this->session->userdata('nip')])->row_array();
+        $data['jumlah_karyawan'] = $this->ModelUser->getUserWhere(['role' => 'pegawai'])->num_rows();
 
         $this->load->view('admin/templates/header', $data);
         $this->load->view('admin/templates/sidebar', $data);

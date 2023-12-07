@@ -11,6 +11,17 @@ class ModelUser extends CI_Model
         $this->db->insert($this->tabel, $data);
     }
 
+    public function updateUser($data = null, $where = null)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tabel, $data);
+    }
+
+    public function hapusUser($where = null)
+    {
+        $this->db->delete($this->tabel, $where);
+    }
+
     public function cekData($where = null)
     {
         return $this->db->get_where($this->tabel, $where);
@@ -18,7 +29,6 @@ class ModelUser extends CI_Model
 
     public function getUserWhere($where = null)
     {
-        var_dump($where);
         return $this->db->get_where($this->tabel, $where);
     }
     public function cekUserAccess($where = null)
