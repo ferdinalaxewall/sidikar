@@ -6,6 +6,12 @@
         <div class="card col-12">
             <div class="card-body">
                 <form action="<?= base_url("karyawan/ubahKaryawan/{$karyawan['id']}") ?>" method="post">
+
+                    <?php if (validation_errors()) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= validation_errors() ?>
+                        </div>
+                    <?php } ?>
                     
                     <div class="form-group">
                         <label for="nip" class="form-label">Nomor Induk Pegawai (NIP)</label>

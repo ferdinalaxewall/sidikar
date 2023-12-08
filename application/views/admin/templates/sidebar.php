@@ -34,7 +34,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="<?= base_url('buku/kategori') ?>">
+    <a class="nav-link" href="<?= base_url('jadwalPresensi') ?>">
         <i class="fas fa-fw fa-calendar"></i>
         <span>Jadwal Presensi</span></a>
 </li>
