@@ -15,3 +15,13 @@ SiDiKar adalah Sebuah Sistem Informasi untuk Keperluan Absensi Karyawan di Sebua
 - Coba jalankan terlebih dahulu menggunakan Web Server (Jika menggunakan XAMPP, simpan project ini dalam folder xampp/htdocs).
 - Apabila CSS nya tidak terbaca, dan ada beberapa URL yang not found. Anda perlu mengkonfigurasi file "application/config/config.php".
 - Silahkan Cari dan Ganti `$config['base_url'] = 'http://localhost:8080';` sesuai dengan URL pada Web Server anda.
+
+## Default Akun Administrator
+- NIP: 12220586
+- Password: password
+
+## Keterangan Author
+- Nama: Muhamad Ferdinal Raihan Abdullah
+- NIM: 12220586
+- Kelas: 12.3E.13
+- Universitas Bina Sarana Informatika - Web Programming II
