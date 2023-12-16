@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <h1 class="h3 mb-0 text-gray-800">Ubah Kategori Buku</h1>
+    <h1 class="h3 mb-0 text-gray-800">Ubah Karyawan</h1>
     
     <div class="row mt-3">
         <div class="card col-12">
@@ -22,8 +22,12 @@
                         <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Karyawan" class="form-control" value="<?= $karyawan['nama'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="jabatan" class="form-label">Jabatan</label>
-                        <input type="text" name="jabatan" id="jabatan" placeholder="Masukkan jabatan Karyawan" class="form-control" value="<?= $karyawan['jabatan'] ?>" required>
+                        <label for="id_jabatan" class="form-label">Jabatan</label>
+                        <select name="id_jabatan" id="id_jabatan" class="form-control form-control-user" required>
+                            <?php foreach($jabatan as $jbt) { ?>
+                                <option value="<?= $jbt['id'] ?>"><?= $jbt['nama_jabatan'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>

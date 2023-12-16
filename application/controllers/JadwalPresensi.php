@@ -11,10 +11,10 @@ class JadwalPresensi extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Data Jadwal Presensi';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
-        $data['jadwal_presensi'] = $this->ModelJadwalPresensi->getJadwalPresensi();
+        $data['jadwal_presensi'] = $this->ModelJadwalPresensi->cariSemuaJadwalPresensi();
 
         $this->load->view('admin/templates/header', $data);
         $this->load->view('admin/templates/sidebar', $data);
@@ -26,10 +26,10 @@ class JadwalPresensi extends CI_Controller
     public function ubahJadwal()
     {
         $data['judul'] = 'Ubah Jadwal Presensi';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
-        $data['jadwal'] = $this->ModelJadwalPresensi->getWhereJadwalPresensi([
+        $data['jadwal'] = $this->ModelJadwalPresensi->cariJadwalPresensi([
             'id' => $this->uri->segment(3)
         ])->row_array();
 
@@ -69,11 +69,9 @@ class JadwalPresensi extends CI_Controller
             ];
 
             // Update Jadwal Presensi Data
-            $this->db->where([
+            $this->ModelJadwalPresensi->updateJadwalPresensi($data, [
                 'id' => $this->uri->segment(3)
             ]);
-
-            $this->db->update('jadwal_presensi', $data);
 
             $this->session->set_flashdata(
                 'pesan',

@@ -2,15 +2,21 @@
 
 class ModelJadwalPresensi extends CI_Model
 {
-    private $tabel = 'jadwal_presensi';
+    protected $tabel = 'jadwal_presensi';
 
-    public function getJadwalPresensi()
+    public function cariSemuaJadwalPresensi()
     {
         return $this->db->get($this->tabel)->result_array();
     }
 
-    public function getWhereJadwalPresensi($where = null)
+    public function cariJadwalPresensi($where = null)
     {
         return $this->db->get_where($this->tabel, $where);
+    }
+
+    public function updateJadwalPresensi($data = null, $where = null)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tabel, $data);
     }
 }

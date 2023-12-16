@@ -11,10 +11,11 @@ class Karyawan extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Data Karyawan';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
-        $data['karyawan'] = $this->ModelUser->getUserWhere(['role' => 'pegawai'])->result_array();
+        $data['karyawan'] = $this->ModelUser->cariUser(['role' => 'pegawai'])->result_array();
+        $data['jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
 
         $this->form_validation->set_rules(
             'nip',
@@ -32,10 +33,11 @@ class Karyawan extends CI_Controller
         ]);
 
         $this->form_validation->set_rules(
-            'jabatan',
+            'id_jabatan',
             'Jabatan',
-            'required|trim', [
+            'required|numeric', [
                 'required' => '%s harus diisi!',
+                'numeric' => '%s hanya boleh berisikan angka!',
         ]);
 
         $this->form_validation->set_rules(
@@ -65,7 +67,7 @@ class Karyawan extends CI_Controller
             $data = [
                 'nip' => $nip,
                 'nama' => $this->input->post('nama', true),
-                'jabatan' => $this->input->post('jabatan', true),
+                'id_jabatan' => $this->input->post('id_jabatan', true),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin', true),
                 'tgl_lahir' => $this->input->post('tgl_lahir', true),
                 'password' => password_hash(
@@ -75,23 +77,26 @@ class Karyawan extends CI_Controller
                 'role' => 'pegawai'
             ];
 
-            $this->ModelUser->simpanData($data);
+            $this->ModelUser->simpanUser($data);
+
             $this->session->set_flashdata(
                 'pesan',
                 "<div class='alert alert-success alert-message' role='alert'>Karyawan Berhasil Ditambahkan</div>"
             );
+
             redirect(base_url('karyawan'));
         }
     }
 
     public function ubahKaryawan() {
         $data['judul'] = 'Ubah Data Karyawan';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
-        $data['karyawan'] = $this->ModelUser->getUserWhere([
-            'id' => $this->uri->segment(3)
+        $data['karyawan'] = $this->ModelUser->cariUser([
+            'users.id' => $this->uri->segment(3)
         ])->row_array();
+        $data['jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
         
         $this->form_validation->set_rules(
             'nip',
@@ -109,7 +114,7 @@ class Karyawan extends CI_Controller
         ]);
 
         $this->form_validation->set_rules(
-            'jabatan',
+            'id_jabatan',
             'Jabatan',
             'required|trim', [
                 'required' => '%s harus diisi!',
@@ -143,7 +148,7 @@ class Karyawan extends CI_Controller
             $data = [
                 'nip' => $nip,
                 'nama' => $this->input->post('nama', true),
-                'jabatan' => $this->input->post('jabatan', true),
+                'id_jabatan' => $this->input->post('id_jabatan', true),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin', true),
                 'tgl_lahir' => $this->input->post('tgl_lahir', true),
                 'password' => password_hash(
@@ -152,11 +157,9 @@ class Karyawan extends CI_Controller
                 ),
             ];
 
-            // Update Karyawan Data
-            $this->db->where([
+            $this->ModelUser->updateUser($data, [
                 'id' => $this->uri->segment(3)
             ]);
-            $this->db->update('users', $data);
             
             $this->session->set_flashdata(
                 'pesan',

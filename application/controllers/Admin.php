@@ -11,7 +11,7 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Dashboard';
-        $data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->ModelUser->cariUser(['email' => $this->session->userdata('email')])->row_array();
         $data['members'] = $this->ModelUser->getUserLimit()->result_array();
         $data['books'] = $this->ModelBuku->getBuku()->result_array();
 

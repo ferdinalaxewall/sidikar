@@ -8,6 +8,8 @@ function cek_login()
             'pesan',
             '<div class="alert alert-danger" role="alert">Akses Ditolak. Anda Belum Login!!</div>'
         );
+
+        redirect(base_url('autentikasi'));
     } else {
         $role = $ci->session->userdata('role');
     }

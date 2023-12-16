@@ -35,7 +35,7 @@ class Autentikasi extends CI_Controller
     {
         $nip = $this->input->post('nip', true);
         $password = $this->input->post('password', true);
-        $user = $this->ModelUser->cekData([
+        $user = $this->ModelUser->cariUser([
             'nip' => $nip
         ]);
 

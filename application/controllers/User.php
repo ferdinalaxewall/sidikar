@@ -11,7 +11,7 @@ class User extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Profil Saya';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
 
@@ -25,7 +25,7 @@ class User extends CI_Controller
     public function anggota()
     {
         $data['judul'] = 'Data Anggota';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
         $data['anggota'] = $this->db->get('user')->result_array();
@@ -40,7 +40,7 @@ class User extends CI_Controller
     public function ubahProfil()
     {
         $data['judul'] = 'Ubah Profil';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
         ])->row_array();
 

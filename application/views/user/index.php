@@ -18,7 +18,7 @@
                         <?= "{$user['nama']} ({$user['jenis_kelamin']})" ?>
                     </h5>
                     <p class="card-text">
-                        <?= $user['nip'] ?> - <?= $user['jabatan'] ?? "Belum ada Jabatan" ?> 
+                        <?= $user['nip'] ?> - <?= $user['nama_jabatan'] ?? "Belum ada Jabatan" ?> 
                     </p>
                     <p class="card-text">
                         <small>Tanggal Lahir: </small>

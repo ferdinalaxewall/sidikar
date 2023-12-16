@@ -4,9 +4,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ModelUser extends CI_Model
 {
-    private $tabel = 'users';
+    protected $tabel = 'users';
 
-    public function simpanData($data = null)
+    public function cariUser($where = null)
+    {
+        $this->db->select([
+            'users.*',
+            'nama_jabatan',
+            'min_jam_kerja'
+        ]);
+        
+        $this->db->from($this->tabel);
+        $this->db->join('jabatan', 'jabatan.id = users.id_jabatan');
+        $this->db->where($where);
+
+        return $this->db->get();
+    }
+
+    public function getUserLimit()
+    {
+        $this->db->select('*');
+        $this->db->from($this->tabel);
+        $this->db->limit(10, 0);
+        
+        return $this->db->get();
+    }
+
+    public function simpanUser($data = null)
     {
         $this->db->insert($this->tabel, $data);
     }
@@ -20,32 +44,5 @@ class ModelUser extends CI_Model
     public function hapusUser($where = null)
     {
         $this->db->delete($this->tabel, $where);
-    }
-
-    public function cekData($where = null)
-    {
-        return $this->db->get_where($this->tabel, $where);
-    }
-
-    public function getUserWhere($where = null)
-    {
-        return $this->db->get_where($this->tabel, $where);
-    }
-    public function cekUserAccess($where = null)
-    {
-        $this->db->select('*');
-        $this->db->from('access_menu');
-        $this->db->where($where);
-
-        return $this->db->get();
-    }
-
-    public function getUserLimit()
-    {
-        $this->db->select('*');
-        $this->db->from($this->tabel);
-        $this->db->limit(10, 0);
-        
-        return $this->db->get();
     }
 }

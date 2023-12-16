@@ -11,7 +11,7 @@ class Buku extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Data Buku';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'email' => $this->session->userdata('email')
         ])->row_array();
         $data['books'] = $this->ModelBuku->getBuku()->result_array();
@@ -85,7 +85,7 @@ class Buku extends CI_Controller
 
     public function ubahBuku() {
         $data['judul'] = 'Ubah Data Buku';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'email' => $this->session->userdata('email')
         ])->row_array();
         $data['book'] = $this->ModelBuku->bukuWhere([
@@ -207,7 +207,7 @@ class Buku extends CI_Controller
     public function kategori()
     {
         $data['judul'] = 'Data Kategori Buku';
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'email' => $this->session->userdata('email')
         ])->row_array();
         $data['categories'] = $this->ModelBuku->getKategori()->result_array();
@@ -250,7 +250,7 @@ class Buku extends CI_Controller
         $data['judul'] = 'Ubah Kategori';
         $id_kategori = $this->uri->segment(3);
 
-        $data['user'] = $this->ModelUser->cekData([
+        $data['user'] = $this->ModelUser->cariUser([
             'email' => $this->session->userdata('email')
         ])->row_array();
         $data['category'] = $this->ModelBuku->kategoriWhere([

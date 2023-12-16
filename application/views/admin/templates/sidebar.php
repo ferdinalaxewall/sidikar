@@ -28,6 +28,12 @@
 </div>
 
 <li class="nav-item">
+    <a class="nav-link" href="<?= base_url('jabatan') ?>">
+        <i class="fas fa-fw fa-tag"></i>
+        <span>Jabatan</span></a>
+</li>
+
+<li class="nav-item">
     <a class="nav-link" href="<?= base_url('karyawan') ?>">
         <i class="fas fa-fw fa-users"></i>
         <span>Karyawan</span></a>

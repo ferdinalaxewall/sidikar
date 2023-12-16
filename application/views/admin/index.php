@@ -21,7 +21,7 @@
                                     Jumlah Anggota
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?= $this->ModelUser->getUserWhere(['role_id' => 1])->num_rows() ?>
+                                    <?= $this->ModelUser->cariUser(['role_id' => 1])->num_rows() ?>
                                 </div>
                             </div>
                             <div class="col-auto">

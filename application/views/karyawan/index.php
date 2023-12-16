@@ -40,7 +40,7 @@
                             <td><?= $index + 1 ?></td>
                             <td><?= $pegawai['nip'] ?></td>
                             <td><?= $pegawai['nama'] ?></td>
-                            <td><?= $pegawai['jabatan'] ?></td>
+                            <td><?= $pegawai['nama_jabatan'] ?></td>
                             <td><?= $pegawai['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan' ?></td>
                             <td><?= date('d-m-Y', strtotime($pegawai['tgl_lahir'])) ?></td>
                             <td>
@@ -69,7 +69,7 @@
     <div class="modal-dialog modal-dialog-centered  " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Buku</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Karyawan</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -85,8 +85,13 @@
                         <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Karyawan" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="jabatan" class="form-label">Jabatan</label>
-                        <input type="text" name="jabatan" id="jabatan" placeholder="Masukkan jabatan Karyawan" class="form-control" required>
+                        <label for="id_jabatan" class="form-label">Jabatan</label>
+                        <select name="id_jabatan" id="id_jabatan" class="form-control form-control-user" required>
+                            <option value="" selected disabled>Pilih Jabatan</option>
+                            <?php foreach($jabatan as $jbt) { ?>
+                                <option value="<?= $jbt['id'] ?>"><?= $jbt['nama_jabatan'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
