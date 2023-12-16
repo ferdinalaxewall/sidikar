@@ -8,6 +8,7 @@ class Karyawan extends CI_Controller
         cek_login();
     }
 
+    // Fungsi untuk menampilkan data karyawan
     public function index()
     {
         $data['judul'] = 'Data Karyawan';
@@ -17,6 +18,7 @@ class Karyawan extends CI_Controller
         $data['karyawan'] = $this->ModelUser->cariUser(['role' => 'pegawai'])->result_array();
         $data['jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
 
+        // Validasi tambah data karyawan
         $this->form_validation->set_rules(
             'nip',
             'NIP',
@@ -62,6 +64,7 @@ class Karyawan extends CI_Controller
             $this->load->view('karyawan/index', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Proses menyimpan data karyawan baru ke dalam database
             $nip = $this->input->post('nip', true);
 
             $data = [
@@ -88,6 +91,7 @@ class Karyawan extends CI_Controller
         }
     }
 
+    // Fungsi untuk mengubah data karyawan
     public function ubahKaryawan() {
         $data['judul'] = 'Ubah Data Karyawan';
         $data['user'] = $this->ModelUser->cariUser([
@@ -98,6 +102,7 @@ class Karyawan extends CI_Controller
         ])->row_array();
         $data['jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
         
+        // Validasi ubah data karyawan
         $this->form_validation->set_rules(
             'nip',
             'NIP',
@@ -142,6 +147,7 @@ class Karyawan extends CI_Controller
             $this->load->view('karyawan/ubah-karyawan', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Proses menyimpan data karyawan terbaru ke database
 
             $nip = $this->input->post('nip', true);
 
@@ -170,6 +176,7 @@ class Karyawan extends CI_Controller
         }
     }
 
+    // Fungsi untuk menghapus data karyawan
     public function hapusKaryawan()
     {
         $this->ModelUser->hapusUser([

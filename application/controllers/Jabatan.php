@@ -8,6 +8,7 @@ class Jabatan extends CI_Controller
         cek_login();
     }
 
+    // Fungsi untuk menampilkan Data Jabatan Karyawan
     public function index()
     {
         $data['judul'] = 'Data Jabatan Karyawan';
@@ -16,7 +17,7 @@ class Jabatan extends CI_Controller
         ])->row_array();
         $data['list_jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
 
-
+        // Validasi tambah Data Jabatan
         $this->form_validation->set_rules(
             'nama_jabatan',
             'Nama Jabatan',
@@ -39,11 +40,12 @@ class Jabatan extends CI_Controller
             $this->load->view('jabatan/index', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Proses Menyimpan Data Jabatan Baru ke dalam database
+
             $data = [
                 'nama_jabatan' => $this->input->post('nama_jabatan', true),
                 'min_jam_kerja' => abs($this->input->post('min_jam_kerja', true)),
             ];
-
 
             $this->ModelJabatan->simpanJabatan($data);
 
@@ -56,9 +58,9 @@ class Jabatan extends CI_Controller
         }
     }
 
+    // Fungsi untuk mengubah data jabatan
     public function ubahJabatan()
     {
-
         $data['judul'] = 'Ubah Jabatan Karyawan';
         $data['user'] = $this->ModelUser->cariUser([
             'nip' => $this->session->userdata('nip')
@@ -67,7 +69,7 @@ class Jabatan extends CI_Controller
             'id' => $this->uri->segment(3)
         ])->row_array();
 
-
+        // Validasi Ubah Data Jabatan
         $this->form_validation->set_rules(
             'nama_jabatan',
             'Nama Jabatan',
@@ -90,6 +92,8 @@ class Jabatan extends CI_Controller
             $this->load->view('jabatan/ubah-jabatan', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Proses Mengubah Data Jabatan di Database
+
             $data = [
                 'nama_jabatan' => $this->input->post('nama_jabatan', true),
                 'min_jam_kerja' => abs($this->input->post('min_jam_kerja', true)),
@@ -108,6 +112,7 @@ class Jabatan extends CI_Controller
         }
     }
 
+    // Fungsi untuk menghapus data jabatan
     public function hapusJabatan()
     {
         $this->ModelJabatan->hapusJabatan([

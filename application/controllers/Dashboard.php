@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller
         cek_login();
     }
 
+    // Fungsi untuk menampilkan Halaman Dashboard Beserta data yang dibutuhkan
     public function index()
     {
         $data['judul'] = 'Dashboard';
@@ -17,9 +18,10 @@ class Dashboard extends CI_Controller
             'tanggal_presensi' => date('Y-m-d'),
         ])->result_array();
 
+        // Mengambil data user_id yang sudah melakukan presensi
         $array_user_id_presensi = array_map( fn ($item) => $item['user_id'], $data['presensi_karyawan']);
 
-        // Total Data Presensi1
+        // Total Data Presensi
         $data['total_hadir'] = $this->ModelPresensi->cariPresensi([
             'status' => $this->ModelPresensi->HADIR,
             'tanggal_presensi' => date('Y-m-d')
@@ -41,6 +43,7 @@ class Dashboard extends CI_Controller
             'tanggal_presensi' => date('Y-m-d')
         ])->result_array();
 
+        // Mengecek Jadwal Hari ini
         $data['cek_jadwal_hari_ini'] = $this->ModelJadwalPresensi->cariJadwalPresensi([
             'hari' => date('l'),
             'is_active' => true

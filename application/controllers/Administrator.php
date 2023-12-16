@@ -8,6 +8,7 @@ class Administrator extends CI_Controller
         cek_login();
     }
 
+    // Fungsi Untuk Menampilkan Data User dengan Role Administrator
     public function index()
     {
         $data['judul'] = 'Data Administrator';
@@ -17,6 +18,7 @@ class Administrator extends CI_Controller
         $data['karyawan'] = $this->ModelUser->cariUser(['role' => 'admin'])->result_array();
         $data['jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
 
+        // Validasi Tambah Administrator
         $this->form_validation->set_rules(
             'nip',
             'NIP',
@@ -62,6 +64,8 @@ class Administrator extends CI_Controller
             $this->load->view('administrator/index', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Proses Menyimpan Data Administrator Baru ke database
+
             $nip = $this->input->post('nip', true);
 
             $data = [
@@ -88,6 +92,7 @@ class Administrator extends CI_Controller
         }
     }
 
+    // Fungsi untuk Mengubah Data Administrator
     public function ubahAdministrator() {
         $data['judul'] = 'Ubah Data Administrator';
         $data['user'] = $this->ModelUser->cariUser([
@@ -98,6 +103,7 @@ class Administrator extends CI_Controller
         ])->row_array();
         $data['jabatan'] = $this->ModelJabatan->cariSemuaJabatan();
         
+        // Validasi Ubah Data Administrator
         $this->form_validation->set_rules(
             'nip',
             'NIP',
@@ -142,6 +148,7 @@ class Administrator extends CI_Controller
             $this->load->view('administrator/ubah-administrator', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Memperbarui Data Administrator pada Database
 
             $nip = $this->input->post('nip', true);
 
@@ -170,6 +177,7 @@ class Administrator extends CI_Controller
         }
     }
 
+    // Fungsi untuk Menghapus Data Administrator di Database
     public function hapusAdministrator()
     {
         $this->ModelUser->hapusUser([

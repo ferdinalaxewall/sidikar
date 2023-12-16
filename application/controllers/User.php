@@ -8,6 +8,7 @@ class User extends CI_Controller
         cek_login();
     }
 
+    // Fungsi untuk menampilkan Profil Akun
     public function index()
     {
         $data['judul'] = 'Profil Saya';
@@ -22,21 +23,7 @@ class User extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
-    public function anggota()
-    {
-        $data['judul'] = 'Data Anggota';
-        $data['user'] = $this->ModelUser->cariUser([
-            'nip' => $this->session->userdata('nip')
-        ])->row_array();
-        $data['anggota'] = $this->db->get('user')->result_array();
-
-        $this->load->view('admin/templates/header', $data);
-        $this->load->view('admin/templates/sidebar', $data);
-        $this->load->view('admin/templates/topbar', $data);
-        $this->load->view('user/anggota', $data);
-        $this->load->view('admin/templates/footer');
-    }
-
+    // Fungsi untuk mengubah data profil
     public function ubahProfil()
     {
         $data['judul'] = 'Ubah Profil';
@@ -44,6 +31,7 @@ class User extends CI_Controller
             'nip' => $this->session->userdata('nip')
         ])->row_array();
 
+        // Validasi Ubah Data Profil
         $this->form_validation->set_rules(
             'nama',
             'Nama Lengkap',
@@ -78,6 +66,7 @@ class User extends CI_Controller
             $dto['tgl_lahir'] = $this->input->post('tgl_lahir', true);
             $upload_image = $_FILES['image']['name'];
             
+            // Upload Image Jika Terdapat File yang di Upload
             if ($upload_image) {
                 $config['upload_path'] = './assets/img/profile/';
                 $config['allowed_types'] = 'gif|jpg|png';
@@ -122,6 +111,7 @@ class User extends CI_Controller
         }
     }
 
+    // Fungsi untuk mengubah password akun yang sedang login
     public function ubahPassword()
     {
         $data['judul'] = 'Ubah Profil';
@@ -129,6 +119,7 @@ class User extends CI_Controller
             'nip' => $this->session->userdata('nip')
         ])->row_array();
 
+        // Validasi Ubah Password
         $this->form_validation->set_rules(
             'password_lama',
             'Password Lama',
@@ -160,9 +151,11 @@ class User extends CI_Controller
             $this->load->view('user/ubah-password', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Cek Password Lama
             $cek_password_lama = password_verify($this->input->post('password_lama', true), $data['user']['password']);
 
             if ($cek_password_lama) {
+                // Menyimpan Password Baru kedalam database
                 $dataPassword = [
                     'password' => password_hash(
                         $this->input->post('password_baru', true),

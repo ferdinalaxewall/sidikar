@@ -2,6 +2,7 @@
 
 class Autentikasi extends CI_Controller
 {
+    // Fungsi untuk menampilkan Halaman Login
     public function index()
     {
         if ($this->session->userdata('email')) {
@@ -31,6 +32,7 @@ class Autentikasi extends CI_Controller
         }
     }
 
+    // Fungsi untuk memproses autentikasi login
     private function _login()
     {
         $nip = $this->input->post('nip', true);
@@ -69,16 +71,19 @@ class Autentikasi extends CI_Controller
         }
     }
 
+    // Fungsi untuk menampilkan halaman yang di blokir
     public function blok()
     {
         $this->load->view('autentikasi/blok');
     }
-
+    
+    // Fungsi untuk menampilkan halaman yang di gagal di akses
     public function gagal()
     {
         $this->load->view('autentikasi/gagal');
     }
 
+    // Fungsi untuk memproses logout akun
     public function logout()
     {
         $data = array(

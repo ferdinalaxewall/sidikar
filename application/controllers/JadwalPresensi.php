@@ -8,6 +8,7 @@ class JadwalPresensi extends CI_Controller
         cek_login();
     }
 
+    // Fungsi untuk menampilkan data jadwal presensi
     public function index()
     {
         $data['judul'] = 'Data Jadwal Presensi';
@@ -23,6 +24,7 @@ class JadwalPresensi extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
+    // Fungsi untuk mengubah jadwal presensi
     public function ubahJadwal()
     {
         $data['judul'] = 'Ubah Jadwal Presensi';
@@ -33,6 +35,7 @@ class JadwalPresensi extends CI_Controller
             'id' => $this->uri->segment(3)
         ])->row_array();
 
+        // Validasi ubah data jadwal presensi
         $this->form_validation->set_rules(
             'jam_masuk',
             'Jam Masuk',
@@ -62,6 +65,8 @@ class JadwalPresensi extends CI_Controller
             $this->load->view('jadwal-presensi/ubah-jadwal', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            // Proses Menyimpan data jadwal presensi terbaru ke database
+            
             $data = [
                 'jam_masuk' => $this->input->post('jam_masuk', true),
                 'jam_keluar' => $this->input->post('jam_keluar', true),

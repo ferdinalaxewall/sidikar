@@ -6,6 +6,7 @@ class ModelUser extends CI_Model
 {
     protected $tabel = 'users';
 
+    // Fungsi untuk mencari data user dengan kondisi tertentu
     public function cariUser($where = null)
     {
         $this->db->select([
@@ -21,6 +22,7 @@ class ModelUser extends CI_Model
         return $this->db->get();
     }
 
+    // Fungsi untuk mencari data user dengan kondisi tertentu (Where dan Where Not In)
     public function cariUserWhereNotIn(array $array_user_id = [], $where = [])
     {
         $this->db->from($this->tabel);
@@ -33,6 +35,7 @@ class ModelUser extends CI_Model
         return $this->db->get();
     }
 
+    // Fungsi untuk mencari data user dengan limit data
     public function getUserLimit()
     {
         $this->db->select('*');
@@ -42,17 +45,20 @@ class ModelUser extends CI_Model
         return $this->db->get();
     }
 
+    // Fungsi untuk menyimpan data user baru
     public function simpanUser($data = null)
     {
         $this->db->insert($this->tabel, $data);
     }
 
+    // Fungsi untuk memperbarui data user
     public function updateUser($data = null, $where = null)
     {
         $this->db->where($where);
         $this->db->update($this->tabel, $data);
     }
 
+    // Fungsi untuk menghapus data user    
     public function hapusUser($where = null)
     {
         $this->db->delete($this->tabel, $where);
