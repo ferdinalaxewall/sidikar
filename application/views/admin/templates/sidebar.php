@@ -67,28 +67,10 @@
 </div>
 
 <li class="nav-item">
-    <a class="nav-link" href="<?= base_url('buku/kategori') ?>">
+    <a class="nav-link" href="<?= base_url('laporan/presensi') ?>">
         <i class="fas fa-fw fa-table"></i>
         <span>Rekap Presensi</span></a>
 </li>
-
-<!-- <li class="nav-item">
-    <a class="nav-link" href="<?= base_url('buku/kategori') ?>">
-        <i class="fas fa-fw fa-tag"></i>
-        <span>Kategori Buku</span></a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="<?= base_url('buku') ?>">
-        <i class="fas fa-fw fa-book"></i>
-        <span>Data Buku</span></a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="<?= base_url('user/anggota') ?>">
-        <i class="fas fa-fw fa-users"></i>
-        <span>Data Anggota</span></a>
-</li> -->
 
 </ul>
 <!-- End of Sidebar -->
