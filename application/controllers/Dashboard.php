@@ -36,7 +36,9 @@ class Dashboard extends CI_Controller
             'tanggal_presensi' => date('Y-m-d')
         ])->num_rows();
 
-        $data['total_tidak_hadir'] += $this->ModelUser->cariUserWhereNotIn($array_user_id_presensi)->num_rows();
+        $data['total_tidak_hadir'] += $this->ModelUser->cariUserWhereNotIn($array_user_id_presensi, [
+            'role' => 'pegawai'
+        ])->num_rows();
 
         // Data Presensi Hari Ini
         $data['presensi_hari_ini'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
