@@ -13,8 +13,13 @@ class Dashboard extends CI_Controller
         $data['judul'] = 'Dashboard';
         $data['user'] = $this->ModelUser->cariUser(['nip' => $this->session->userdata('nip')])->row_array();
         $data['jumlah_karyawan'] = $this->ModelUser->cariUser(['role' => 'pegawai'])->num_rows();
+        $data['presensi_karyawan'] = $this->ModelPresensi->cariPresensiKaryawan('user_id', [
+            'tanggal_presensi' => date('Y-m-d'),
+        ])->result_array();
 
-        // Total Data Presensi
+        $array_user_id_presensi = array_map( fn ($item) => $item['user_id'], $data['presensi_karyawan']);
+
+        // Total Data Presensi1
         $data['total_hadir'] = $this->ModelPresensi->cariPresensi([
             'status' => $this->ModelPresensi->HADIR,
             'tanggal_presensi' => date('Y-m-d')
@@ -23,10 +28,13 @@ class Dashboard extends CI_Controller
             'status' => $this->ModelPresensi->TERLAMBAT,
             'tanggal_presensi' => date('Y-m-d')
         ])->num_rows();
+        
         $data['total_tidak_hadir'] = $this->ModelPresensi->cariPresensi([
             'status' => $this->ModelPresensi->TIDAK_HADIR,
             'tanggal_presensi' => date('Y-m-d')
         ])->num_rows();
+
+        $data['total_tidak_hadir'] += $this->ModelUser->cariUserWhereNotIn($array_user_id_presensi)->num_rows();
 
         // Data Presensi Hari Ini
         $data['presensi_hari_ini'] = $this->ModelPresensi->cariPresensiJoinKaryawan([

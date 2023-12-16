@@ -13,6 +13,15 @@ class ModelPresensi extends CI_Model
         return $this->db->get_where($this->tabel, $where);
     }
 
+    public function cariPresensiKaryawan($select = '*', $where = null)
+    {
+        $this->db->select($select);
+        $this->db->from($this->tabel);
+        $this->db->where($where);
+
+        return $this->db->get();
+    }
+
     public function cariPresensiJoinKaryawan($where = null)
     {
         $this->db->select([

@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; <?= date('Y') ?>. Pustaka Booking - Muhamad Ferdinal 12220586 </span>
+                        <span>Copyright &copy; <?= date('Y') ?>. SiDiKar - Kelompok 1 12.3E.13 - Web Programming II </span>
                     </div>
                 </div>
             </footer>

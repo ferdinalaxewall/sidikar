@@ -121,4 +121,71 @@ class User extends CI_Controller
             redirect(base_url('user'));
         }
     }
+
+    public function ubahPassword()
+    {
+        $data['judul'] = 'Ubah Profil';
+        $data['user'] = $this->ModelUser->cariUser([
+            'nip' => $this->session->userdata('nip')
+        ])->row_array();
+
+        $this->form_validation->set_rules(
+            'password_lama',
+            'Password Lama',
+            'required|min_length[8]', [
+                'required' => '%s Tidak Boleh Kosong',
+                'min_length' => '%s Minimal 8 Karakter'
+        ]);
+
+        $this->form_validation->set_rules(
+            'password_baru',
+            'Password Baru',
+            'required|min_length[8]', [
+                'required' => '%s Tidak Boleh Kosong',
+                'min_length' => '%s Minimal 8 Karakter'
+        ]);
+
+        $this->form_validation->set_rules(
+            'konfirmasi_password',
+            'Konfirmasi Password Baru',
+            'required|matches[password_baru]', [
+                'required' => '%s Tidak Boleh Kosong',
+                'matches' => '%s Tidak Valid'
+        ]);
+
+        if(! $this->form_validation->run()) {
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/templates/sidebar', $data);
+            $this->load->view('admin/templates/topbar', $data);
+            $this->load->view('user/ubah-password', $data);
+            $this->load->view('admin/templates/footer');
+        } else {
+            $cek_password_lama = password_verify($this->input->post('password_lama', true), $data['user']['password']);
+
+            if ($cek_password_lama) {
+                $dataPassword = [
+                    'password' => password_hash(
+                        $this->input->post('password_baru', true),
+                        PASSWORD_BCRYPT
+                    ),
+                ];
+
+                $this->ModelUser->updateUser($dataPassword, [
+                    'id' => $data['user']['id']
+                ]);
+
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-success alert-message" role="alert">Password Berhasil Diubah</div>'
+                );
+            } else {
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-danger alert-message" role="alert">Password Lama Tidak Sesuai</div>'
+                );
+            }
+
+            redirect(base_url('user/ubahPassword'));
+        }
+    }
 }

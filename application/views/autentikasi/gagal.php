@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pustaka Booking - Gagal Aktivasi Akun</title>
+    <title>SiDiKar - Gagal Aktivasi Akun</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

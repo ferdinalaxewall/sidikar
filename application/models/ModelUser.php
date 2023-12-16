@@ -21,6 +21,18 @@ class ModelUser extends CI_Model
         return $this->db->get();
     }
 
+    public function cariUserWhereNotIn(array $array_user_id = [], $where = [])
+    {
+        $this->db->from($this->tabel);
+        $this->db->where($where);
+
+        if (count($array_user_id) > 0) {
+            $this->db->where_not_in('id', $array_user_id);
+        }
+            
+        return $this->db->get();
+    }
+
     public function getUserLimit()
     {
         $this->db->select('*');
