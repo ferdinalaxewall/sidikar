@@ -18,6 +18,25 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+<!-- Heading -->
+<div class="sidebar-heading">
+    Pengguna
+</div>
+
+<li class="nav-item">
+    <a class="nav-link" href="<?= base_url('administrator') ?>">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Administrator</span></a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="<?= base_url('karyawan') ?>">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Karyawan</span></a>
+</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -31,12 +50,6 @@
     <a class="nav-link" href="<?= base_url('jabatan') ?>">
         <i class="fas fa-fw fa-tag"></i>
         <span>Jabatan</span></a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="<?= base_url('karyawan') ?>">
-        <i class="fas fa-fw fa-users"></i>
-        <span>Karyawan</span></a>
 </li>
 
 <li class="nav-item">
