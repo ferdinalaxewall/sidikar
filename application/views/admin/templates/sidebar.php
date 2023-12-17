@@ -18,6 +18,9 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
+
+<?php if ($user['role'] == 'admin') { ?> 
+
 <!-- Divider -->
 <hr class="sidebar-divider">
 
@@ -57,6 +60,8 @@
         <i class="fas fa-fw fa-calendar"></i>
         <span>Jadwal Presensi</span></a>
 </li>
+
+<?php } ?>
 
 <!-- Divider -->
 <hr class="sidebar-divider">
