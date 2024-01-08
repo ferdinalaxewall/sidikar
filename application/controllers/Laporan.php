@@ -12,9 +12,17 @@ class Laporan extends CI_Controller
     {
         $data['judul'] = "Riwayat Presensi";
         $data['user'] = $this->ModelUser->cariUser(['nip' => $this->session->userdata('nip')])->row_array();
-        $data['presensi_karyawan'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
-            'tanggal_presensi' => date('Y-m-d'),
-        ])->result_array();
+
+        if ($data['user']['role'] == 'pegawai') {
+            $data['presensi_karyawan'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
+                'tanggal_presensi' => date('Y-m-d'),
+                'user_id' => $data['user']['id']
+            ])->result_array();
+        } else {
+            $data['presensi_karyawan'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
+                'tanggal_presensi' => date('Y-m-d'),
+            ])->result_array();
+        }
 
         $data['tanggal'] = date('d F Y');
 

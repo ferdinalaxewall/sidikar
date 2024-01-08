@@ -41,9 +41,16 @@ class Dashboard extends CI_Controller
         ])->num_rows();
 
         // Data Presensi Hari Ini
-        $data['presensi_hari_ini'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
-            'tanggal_presensi' => date('Y-m-d')
-        ], 10)->result_array();
+        if ($data['user']['role'] == 'pegawai') {
+            $data['presensi_hari_ini'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
+                'tanggal_presensi' => date('Y-m-d'),
+                'user_id' => $data['user']['id']
+            ], 10)->result_array();
+        } else {
+            $data['presensi_hari_ini'] = $this->ModelPresensi->cariPresensiJoinKaryawan([
+                'tanggal_presensi' => date('Y-m-d')
+            ], 10)->result_array();
+        }
 
         // Mengecek Jadwal Hari ini
         $data['cek_jadwal_hari_ini'] = $this->ModelJadwalPresensi->cariJadwalPresensi([
