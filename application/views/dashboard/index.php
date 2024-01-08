@@ -271,7 +271,7 @@
                             <div class="page-header mb-3 mt-2">
                                 <span class="text-primary d-inline-flex align-items-center font-weight-bold" style="gap: 10px">
                                     <i class="fas fa-fingerprint"></i> 
-                                    Data Presensi Hari Ini
+                                    Data Presensi Hari Ini (Terbaru)
                                 </span>
                                 <span class="text-muted"> - <?= date('d F Y') ?></span>
                                 <a href="<?= base_url('user/data_user') ?>" class="text-danger ml-3">

@@ -15,7 +15,7 @@ class ModelPresensi extends CI_Model
     }
 
     // Fungsi untuk mencari data presensi dengan kondisi tertentu beserta kolom yang ingin di munculkan
-    public function cariPresensiKaryawan($select = '*', $where = null)
+    public function cariPresensiKaryawan($select = '*', $where = [])
     {
         $this->db->select($select);
         $this->db->from($this->tabel);
@@ -25,7 +25,7 @@ class ModelPresensi extends CI_Model
     }
 
     // Fungsi untuk mencari data presensi beserta dengan data karyawan yang terkait berdasarkan kondisi tertentu
-    public function cariPresensiJoinKaryawan($where = null)
+    public function cariPresensiJoinKaryawan($where = [], $limit = null)
     {
         $this->db->select([
             'presensi.*',
@@ -36,6 +36,8 @@ class ModelPresensi extends CI_Model
         $this->db->from($this->tabel);
         $this->db->join('users', 'users.id = presensi.user_id');
         $this->db->where($where);
+
+        if(!is_null($limit)) $this->db->limit($limit);
 
         return $this->db->get();
     }
